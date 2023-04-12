@@ -3,7 +3,7 @@ import tkinter.ttk as ttk
 
 
 class SUI:
-    def __init__(self, pack_name, font=('Terminal', 8), font_big=('Terminal', 25)):
+    def __init__(self, pack_name, font='Arial'):
         self.app = tk.Tk()
         self.groups = tk.Frame(self.app)
         self.packages = tk.Frame(self.app)
@@ -11,16 +11,15 @@ class SUI:
         butt = ttk.Style()
         butt.configure('my.TButton', font=font)
         check = ttk.Style()
-        check.configure('my.TCheckbutton', font=font)
-        ttk.Label(self.app, text=pack_name, font=font_big).pack(anchor='center')
+        check.configure('my.TCheckbutton', font=(font, 5))
+        ttk.Label(self.app, text=pack_name, font=(font, 20)).pack(anchor='center')
         self.app.title(pack_name)
         self.groups.pack(anchor='center')
         self.packages.pack(anchor='center')
 
     def set_code(self, code):
         for i, c in zip(self.packages_val, code):
-            if not i[2]:
-                i[0].set(c)
+            i[0].set(c)
 
     def add_group(self, name, code):
         ttk.Label(self.groups).pack(side='left')
@@ -38,9 +37,9 @@ class SUI:
         chk.pack()
 
     def get_user_data(self, close_name='Install'):
+        data = []
         ttk.Button(self.app, text=close_name, command=self.app.destroy, style='my.TButton').pack()
         self.app.mainloop()
-        data = []
         for i in self.packages_val:
             if i[0].get():
                 data.append(i[1])
