@@ -3,7 +3,7 @@ import tkinter.ttk as ttk
 
 
 class SUI:
-    def __init__(self, pack_name, argv, font='Arial'):
+    def __init__(self, pack_name, font='Arial'):
         self.app = tk.Tk()
         self.groups = tk.Frame(self.app)
         self.packages = tk.Frame(self.app)
@@ -11,14 +11,11 @@ class SUI:
         butt = ttk.Style()
         butt.configure('my.TButton', font=font)
         check = ttk.Style()
-        check.configure('my.TCheckbutton', font=(font, 10))
+        check.configure('my.TCheckbutton', font=(font, 5))
         ttk.Label(self.app, text=pack_name, font=(font, 20)).pack(anchor='center')
         self.app.title(pack_name)
         self.groups.pack(anchor='center')
         self.packages.pack(anchor='center')
-        self.run = True
-        if 'bdist_wheel' in argv:
-            self.run = False
 
     def set_code(self, code):
         for i, c in zip(self.packages_val, code):
@@ -41,10 +38,9 @@ class SUI:
 
     def get_user_data(self, close_name='Install'):
         data = []
-        if self.run:
-            ttk.Button(self.app, text=close_name, command=self.app.destroy, style='my.TButton').pack()
-            self.app.mainloop()
-            for i in self.packages_val:
-                if i[0].get():
-                    data.append(i[1])
+        ttk.Button(self.app, text=close_name, command=self.app.destroy, style='my.TButton').pack()
+        self.app.mainloop()
+        for i in self.packages_val:
+            if i[0].get():
+                data.append(i[1])
         return {'packages': data}
