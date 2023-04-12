@@ -17,7 +17,7 @@ class SUI:
         self.groups.pack(anchor='center')
         self.packages.pack(anchor='center')
         self.run = True
-        if 'bdist_wheel' not in argv:
+        if 'bdist_wheel' in argv:
             self.run = False
 
     def set_code(self, code):
