@@ -2,16 +2,16 @@ import tkinter as tk
 import tkinter.ttk as ttk
 
 
-class SUI:
+class Application:
     def __init__(self, pack_name, font='Arial'):
         self.app = tk.Tk()
         self.groups = tk.Frame(self.app)
         self.packages = tk.Frame(self.app)
         self.packages_val = []
         butt = ttk.Style()
-        butt.configure('my.TButton', font=font)
+        butt.configure('my.TButton', font=(font, 10))
         check = ttk.Style()
-        check.configure('my.TCheckbutton', font=(font, 5))
+        check.configure('my.TCheckbutton', font=(font, 10))
         ttk.Label(self.app, text=pack_name, font=(font, 20)).pack(anchor='center')
         self.app.title(pack_name)
         self.groups.pack(anchor='center')
@@ -36,9 +36,9 @@ class SUI:
             chk.config(state='disabled')
         chk.pack()
 
-    def get_user_data(self, close_name='Install'):
+    def get_user_data(self):
         data = []
-        ttk.Button(self.app, text=close_name, command=self.app.destroy, style='my.TButton').pack()
+        ttk.Button(self.app, text='Install', command=self.app.destroy, style='my.TButton').pack()
         self.app.mainloop()
         for i in self.packages_val:
             if i[0].get():
